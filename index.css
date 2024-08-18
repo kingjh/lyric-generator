@@ -1,0 +1,148 @@
+body {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-family: '方正小标宋_GBK';
+  color: rgb(109, 29, 107);
+  background: black;
+}
+
+/* 聚焦时移除外圈 */
+div:focus {
+  outline: none;
+}
+
+#coverBody {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+#backBody {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+#songBody {
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-image: url('img/歌曲背景图.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.song-info {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.song-info__cover {
+  width: 240px;
+  height: 216px;
+}
+
+.song-info__words {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.song-info__words-title {
+  font-size: 72px;
+}
+
+.song-info__words-divider {
+  width: 661px;
+  height: 13px;
+  background-color: rgb(109, 29, 107);
+}
+
+.song-info__words-people {
+  width: 661px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+}
+
+.song-info__words-people-person {
+  margin-top: 24px;
+  flex: 1;
+  height: 100px;
+}
+
+.song-info__words-people-lyricist-title {
+  font-size: 24px;
+  margin: 8px;
+}
+
+.song-info__words-people-lyricist-name {
+  font-size: 36px;
+  margin: 8px;
+}
+
+.song-info__words-people-composer-title {
+  font-size: 24px;
+  margin: 8px;
+}
+
+.song-info__words-people-composer-name {
+  font-size: 36px;
+  margin: 8px;
+}
+
+#lyricsBody {
+  width: 100%;
+  /*一定要给一个padding top否则占不住顶部*/
+  padding-top: 1px;
+  background-image: url('img/歌词背景图.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.lyrics-container {
+  width: 100%;
+  height: calc(720px - 56px);
+  margin-top: 56px;
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  scrollbar-width: none; /* 针对 Firefox */
+  -ms-overflow-style: none; /* 针对 Internet Explorer 和 Edge */
+}
+
+.lyrics-container::-webkit-scrollbar {
+  display: none; /* 针对 Chrome, Safari 和 Opera */
+}
+
+#lyricLines {
+  line-height: 2;
+}
+
+.lyric-line {
+  padding: 0 48px;
+  font-size: 64px;
+}
+
+.lyric-line:focus {
+  font-weight: 900;
+}
