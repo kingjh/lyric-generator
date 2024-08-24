@@ -35,14 +35,17 @@ def extract_song(album_cover, lyrics):
 
         if ' - ' in line_lyric:
             song_info['songName'] = line_lyric.split(' - ')[0]
-        elif line_lyric.startswith('词：'):
-            song_info['lyricist'] = line_lyric.replace('词：', '')
-        elif line_lyric.startswith('曲：'):
-            song_info['composer'] = line_lyric.replace('曲：', '')
         else:
             words = line_lyric.split('：')
             if len(words) > 1:
-                if words[0].upper() in [item.upper() for item in EXCLUDED_ROLES]:
+                if any(role in words[0] for role in EXCLUDED_ROLES):
+                    continue
+
+                if line_lyric.find('词') != -1:
+                    song_info['lyricist'] = words[1]
+                    continue
+                elif line_lyric.find('曲') != -1:
+                    song_info['composer'] = words[1]
                     continue
 
                 if words[0] != curr_singer:
@@ -51,7 +54,8 @@ def extract_song(album_cover, lyrics):
                 line_lyric = words[1]
 
             if line_lyric:
-                song_info['lyrics'].append(f'{curr_singer}|{cc.convert(line_lyric)}')
+                # 转换为简体，中文空格转为英文空格
+                song_info['lyrics'].append(f'{curr_singer}|{cc.convert(line_lyric.replace("　", " "))}')
 
     return song_info
 
@@ -82,10 +86,10 @@ def gen_song_infos(song_id, song_name, artist_name):
         has_composer = False
         for item in song['data']['lrclist']:
             # 没有词曲的，不采用
-            if item['lineLyric'].find('词：') != -1:
+            if item['lineLyric'].find('词') != -1:
                 has_lyricist = True
 
-            if item['lineLyric'].find('曲：') != -1:
+            if item['lineLyric'].find('曲') != -1:
                 has_composer = True
 
         if not has_lyricist or not has_composer:

@@ -121,7 +121,7 @@ div:focus {
 
 .lyrics-container {
   width: 100%;
-  height: calc(720px - 12px);
+  height: calc(720px - 56px);
   margin-top: 56px;
   display: flex;
   justify-content: flex-start;
@@ -135,12 +135,12 @@ div:focus {
 }
 
 #lyricLines {
-  line-height: 1.8;
+  line-height: 2;
 }
 
 .lyric-line {
   padding: 0 48px;
-  font-size: 64px;
+  font-size: 56px;
 }
 
 /*.lyric-line:focus {*/
