@@ -16,7 +16,7 @@ song_infos = {}
 
 def count_cover_back_files(word):
     # 获取文件夹下的所有文件
-    files = os.listdir('input/img')
+    files = os.listdir('template/input/img')
 
     # 统计以“封面”开头的文件数量
     count = sum(1 for file in files if file.startswith(word))
@@ -115,7 +115,8 @@ def gen_song_infos(song_id, song_name, artist_name):
     idx = scores.index(max(scores))
     sid = infos[idx]['DC_TARGETID']
     song = get_song_info(sid)
-    album_cover = f"https://img1.kuwo.cn/star/albumcover/{infos[idx]['web_albumpic_short']}"
+    # 把唱片封面改成700*700（酷我封面的最大值）
+    album_cover = f"https://img1.kuwo.cn/star/albumcover/{infos[idx]['web_albumpic_short']}".replace('/120/', '/700/')
     song_infos[song_id] = extract_song(album_cover, song['data']['lrclist'])
 
 
@@ -124,7 +125,7 @@ if __name__ == "__main__":
     cc = opencc.OpenCC('t2s')
 
     # 读取Excel文件
-    file_path = 'input/img/歌单.xlsx'  # 替换为你的Excel文件路径
+    file_path = 'template/input/歌单.xlsx'  # 替换为你的Excel文件路径
     df = pd.read_excel(file_path)
 
     # 提取“歌曲”和“歌手”两列
@@ -139,7 +140,7 @@ if __name__ == "__main__":
         gen_song_infos(index + 2, row['歌曲'], row['歌手'])
 
     # 如果目标文件夹存在，则先删除它
-    src_folder = 'input'
+    src_folder = 'template'
     dst_folder = '.'
 
     shutil.copytree(src_folder, dst_folder, ignore=shutil.ignore_patterns('*.xlsx', '*.py'), dirs_exist_ok=True)
