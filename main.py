@@ -55,7 +55,7 @@ def extract_song(album_cover, lyrics):
 
             if line_lyric:
                 # 转换为简体，中文空格转为英文空格
-                song_info['lyrics'].append(f'{curr_singer}|{cc.convert(line_lyric.replace("　", " "))}')
+                song_info['lyrics'].append(f'{curr_singer}|{cc.convert(line_lyric.replace("　", "  "))}')
 
     return song_info
 
